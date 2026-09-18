@@ -966,6 +966,7 @@ function calculateInvest(){
 window.onload = function(){
   toggleCustomInvest();
   calculateInvest();
+  updateMonthlyCountdown();
 }
 
   function updateMonthlyCountdown(){
@@ -978,7 +979,6 @@ window.onload = function(){
     if(ml) ml.textContent=(m+1)+' 月';
     if(cd) cd.textContent=days<=7 ? '本月評估名額即將截止｜剩 '+days+' 天' : '距本月評估截止還有 '+days+' 天';
   }
-  updateMonthlyCountdown();
 </script>
 </body>
 </html>
