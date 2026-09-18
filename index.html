@@ -821,7 +821,8 @@ function calculateInvest(){
   if(paybackMonth >=999){
     document.getElementById('paybackDisplay').innerText = "無法回收";
   }else{
-    document.getElementById('paybackDisplay').innerText = paybackMonth.toFixed(1) + " 個月";
+    const paybackYears = paybackMonth / 12;
+    document.getElementById('paybackDisplay').innerText = paybackYears.toFixed(1) + " 年";
   }
 
   const roiDom = document.getElementById('roiDisplay');
