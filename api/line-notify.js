@@ -14,7 +14,7 @@ module.exports = async function handler(req, res) {
   const name = String(body.name || '').trim().slice(0,60);
   const phone = String(body.phone || '').trim().slice(0,40);
   const location = String(body.location || '').trim().slice(0,120);
-  const note = String(body.note || '').trim().slice(0,500);
+  const note = String(body.note || '').trim().replace(/\\n/g, '\n').slice(0,500);
   const source = String(body.source || '洗思特加盟網站').trim().slice(0,80);
 
   if (!name && !phone && !location && !note) {
@@ -24,13 +24,17 @@ module.exports = async function handler(req, res) {
   const text = [
     '🔔 洗思特｜新加盟詢問',
     '',
+    '👤 客戶資料',
     '姓名：' + (name || '未填'),
     '電話：' + (phone || '未填'),
     '地點：' + (location || '未填'),
-    note ? '備註：' + note : '',
     '',
-    '來源：' + source
-  ].filter(Boolean).join('\n');
+    '📝 客戶需求',
+    note || '無',
+    '',
+    '🌐 來源',
+    source
+  ].join('\n');
 
   try {
     const response = await fetch('https://api.line.me/v2/bot/message/push', {
