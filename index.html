@@ -199,7 +199,10 @@
   #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5) .result-label{width:100%;text-align:center}
   #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5) .result-help{width:100%;text-align:center}
   #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5) .result-help-body{background:#0C1930;color:#fff;font-weight:650;text-align:left;width:100%;box-sizing:border-box}
-  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5) .result-value{font-size:36px;width:100%;text-align:center;margin-top:auto}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5) .result-value{font-size:36px;width:auto;text-align:center;margin-top:18px;padding:10px 22px;background:#E5E7EB;border-radius:12px;line-height:1.1;display:inline-block;font-weight:950}
+  #roiDisplay.roi-low{color:#C62828}
+  #roiDisplay.roi-mid{color:#A86400}
+  #roiDisplay.roi-high{color:#137333}
   #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-label,
   #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-value{color:inherit}
   #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-help summary{opacity:1;font-weight:900;text-decoration:none;text-underline-offset:3px;background:#0C1930;color:#FFD166;padding:6px 10px;border-radius:8px;display:inline-block;box-shadow:0 2px 0 rgba(0,0,0,.12)}
@@ -876,8 +879,10 @@ function calculateInvest(){
   const roiDom = document.getElementById('roiDisplay');
   roiDom.innerText = roiPercent.toFixed(1)+"%";
   roiDom.className = "result-value";
-  if(roiPercent>0) roiDom.classList.add("roi-positive");
-  else if(roiPercent <0) roiDom.classList.add("roi-negative");
+  // Visual bands are presentation aids only, not an investment recommendation.
+  if(roiPercent < 20) roiDom.classList.add("roi-low");
+  else if(roiPercent < 35) roiDom.classList.add("roi-mid");
+  else roiDom.classList.add("roi-high");
 
   document.getElementById('gasMonthly').innerText = formatCurrency(gasCost);
   document.getElementById('electricMonthly').innerText = formatCurrency(elecCost);
