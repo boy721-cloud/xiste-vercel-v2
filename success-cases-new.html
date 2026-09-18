@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>成功案例｜洗思特自助洗衣加盟</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;background:#f5f7fa;color:#0f172a}
+.success-page{padding:18px 14px 60px}
+.hero{text-align:center;padding:0 0 18px}
+.eyebrow{color:#2563eb;font-weight:900;letter-spacing:.08em;font-size:13px}
+.hero h1{font-size:42px;margin:6px 0 12px}
+.hero p{color:#64748b;line-height:1.8}
+.proof{display:inline-flex;margin-top:16px;padding:10px 15px;border-radius:999px;background:#e8f1ff;color:#1d4ed8;font-weight:900}
+.card{background:#fff;border-radius:24px;padding:20px;margin-top:18px}
+.revenue{margin-top:18px;padding:15px;border-radius:15px;background:#f0fdf4}
+.revenue strong{display:block;color:#15803d;font-size:25px}
+</style>
+</head>
+<body>
+<main class="success-page">
+<section class="hero">
+<div class="eyebrow">REAL FRANCHISE CASES</div>
+<h1>成功案例</h1>
+<p>真實門市、真實營運成果。從商圈評估、設備配置到實際營運，洗思特協助加盟主把店開起來。</p>
+<div class="proof">實際案例｜單店月營收 NT$100,000+</div>
+</section>
+<section class="card">
+<h2>社區型門市｜穩定日常需求</h2>
+<p>以住宅生活圈的日常洗衣需求為核心，建立便利的社區服務據點。</p>
+<div class="revenue"><small>實際營運成果</small><strong id="counter">月營收 NT$100,000+</strong></div>
+</section>
+</main>
+<script>
+let current=100000,target=160000;
+const el=document.getElementById("counter");
+const timer=setInterval(()=>{
+ current+=1000;
+ if(current>=target){current=target;clearInterval(timer);}
+ el.textContent="月營收 NT$"+current.toLocaleString()+"+";
+},50);
+</script>
+</body>
+</html>
