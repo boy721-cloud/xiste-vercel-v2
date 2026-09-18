@@ -1002,8 +1002,9 @@ if(menuBtn&&siteMenu){
  function t(id){return document.getElementById(id)?.innerText?.trim()||'—';}
  form.addEventListener('submit',async e=>{
   e.preventDefault();
-  const name=document.getElementById('inqName').value.trim(), phone=document.getElementById('inqPhone').value.trim(), location=document.getElementById('inqLocation').value.trim();
-  if(!/^09\\d{8}$/.test(phone)){alert('請輸入正確的台灣手機號碼（09 開頭，共 10 碼）。');return;}
+  const name=document.getElementById('inqName').value.trim(), phone=document.getElementById('inqPhone').value.replace(/[^0-9]/g,''), location=document.getElementById('inqLocation').value.trim();
+  document.getElementById('inqPhone').value=phone;
+  if(phone.length!==10 || !phone.startsWith('09')){alert('請輸入正確的台灣手機號碼（09 開頭，共 10 碼）。');return;}
   inquiryId=makeId();
   const store=document.getElementById('inqStore').value, budget=document.getElementById('inqBudget').value||'尚未確定', note=document.getElementById('inqNote').value.trim()||'無';
   const summary=['詢價編號：'+inquiryId,'店面狀況：'+store,'預算：'+budget,'客戶備註：'+note,'','目前網站試算摘要','總投資：'+t('totalInvestDisplay'),'穩定期月營收：'+t('monthRevenueDisplay'),'穩定期月淨利：'+t('monthProfitDisplay'),'回本期：'+t('paybackDisplay'),'年化 ROI：'+t('roiDisplay'),'設備：22kg '+(document.getElementById('wash22')?.value||0)+' 台／27kg '+(document.getElementById('wash27')?.value||0)+' 台／雙層烘乾 '+(document.getElementById('dry')?.value||0)+' 組'].join('\\n');
