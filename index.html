@@ -197,8 +197,10 @@
   #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(4){background:#E86A92;color:#fff}
   #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-label,
   #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-value{color:inherit}
-  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-help summary{color:inherit;opacity:.85}
-  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-help-body{color:inherit;background:rgba(255,255,255,.14)}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-help summary{color:inherit;opacity:1;font-weight:900;text-decoration:underline;text-underline-offset:3px}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-help-body{color:inherit;background:rgba(0,0,0,.12);font-weight:650}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(3) .result-help-body,
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(4) .result-help-body{background:rgba(0,0,0,.22);color:#fff}
   @media(max-width:480px){
     #resultWrap > .card:not(.trust-card) .grid-2:first-of-type{grid-template-columns:1fr 1fr}
     #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item{min-height:138px;padding:15px}
