@@ -186,7 +186,12 @@
     margin-bottom:8px;
     font-weight:700;
   }
-  .result-help { color:var(--text-muted); font-size:13px; line-height:1.65; margin:-2px 0 14px; }\n  .result-value {
+  .result-help { margin:2px 0 14px; font-size:13px; color:var(--text-muted); }
+  .result-help summary { cursor:pointer; color:var(--accent); font-weight:700; list-style:none; width:max-content; }
+  .result-help summary::-webkit-details-marker { display:none; }
+  .result-help summary::before { content:"＋ "; }
+  .result-help[open] summary::before { content:"－ "; }
+  .result-help-body { margin-top:9px; line-height:1.65; padding:10px 12px; background:rgba(255,255,255,.035); border-radius:9px; max-width:520px; }\n  .result-value {
     font-size:24px;
     font-weight:900;
   }
@@ -376,23 +381,23 @@
     <h3 class="section-title">淨利 & 回本期快速試算</h3>
     <div class="grid-2">
       <div class="result-item">
-        <div class="result-label">預計月營收</div><div class="result-help">依你設定的機台數、單次價格與每日使用次數，估算門市進入穩定營運後每月可收到的總營業額；這還不是實際賺到的錢。</div>
+        <div class="result-label">預計月營收</div><details class="result-help"><summary>看說明</summary><div class="result-help-body">依你設定的機台數、單次價格與每日使用次數，估算門市進入穩定營運後每月可收到的總營業額；這還不是實際賺到的錢。</div></details>
         <div class="result-value" id="monthRevenueDisplay">NT$ 0</div>
       </div>
       <div class="result-item">
-        <div class="result-label">預估回本期</div><div class="result-help">把前期投入的設備與工程等總投資，用每月預估淨利逐月累積回收；數字越短，代表資金回收越快。</div>
+        <div class="result-label">預估回本期</div><details class="result-help"><summary>看說明</summary><div class="result-help-body">把前期投入的設備與工程等總投資，用每月預估淨利逐月累積回收；數字越短，代表資金回收越快。</div></details>
         <div class="result-value" id="paybackDisplay">0 個月</div>
       </div>
       <div class="result-item">
-        <div class="result-label">預計月淨利</div><div class="result-help">月營收扣掉試算中的水、電、瓦斯、店租與其他每月營運成本後，剩下的預估金額。</div>
+        <div class="result-label">預計月淨利</div><details class="result-help"><summary>看說明</summary><div class="result-help-body">月營收扣掉試算中的水、電、瓦斯、店租與其他每月營運成本後，剩下的預估金額。</div></details>
         <div class="result-value" id="monthProfitDisplay">NT$ 0</div>
       </div>
       <div class="result-item">
-        <div class="result-label">投資金額</div><div class="result-help">開店前預估需要投入的總資金，包含機台設備與你下方設定的水電、裝潢、瓦斯、招牌、風管及其他建置費。</div>
+        <div class="result-label">投資金額</div><details class="result-help"><summary>看說明</summary><div class="result-help-body">開店前預估需要投入的總資金，包含機台設備與你下方設定的水電、裝潢、瓦斯、招牌、風管及其他建置費。</div></details>
         <div class="result-value" id="totalInvestDisplay">NT$ 0</div>
       </div>
       <div class="result-item grid-full result-big">
-        <div class="result-label">穩定期年化 ROI</div><div class="result-help">簡單理解就是「一年預估淨利占總投資的比例」。例如 ROI 30%，代表穩定期一年預估淨利約等於投入資金的 30%；不是保證報酬。</div>
+        <div class="result-label">穩定期年化 ROI</div><details class="result-help"><summary>看說明</summary><div class="result-help-body">簡單理解就是「一年預估淨利占總投資的比例」。例如 ROI 30%，代表穩定期一年預估淨利約等於投入資金的 30%；不是保證報酬。</div></details>
         <div class="result-value" id="roiDisplay">0%</div>
       </div>
     </div>
