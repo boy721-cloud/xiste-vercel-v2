@@ -950,6 +950,21 @@ if(menuBtn&&siteMenu){
  document.addEventListener('click',e=>{if(!siteMenu.contains(e.target)&&e.target!==menuBtn){siteMenu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}});
 }
 </script>
+<div id="lineTestBox" style="position:fixed;right:14px;bottom:14px;z-index:9999">
+<button id="lineTestBtn" type="button" style="border:0;border-radius:999px;padding:12px 16px;font-weight:700;box-shadow:0 4px 18px #0003;cursor:pointer">測試 LINE 通知</button>
+</div>
+<script>
+document.getElementById('lineTestBtn')?.addEventListener('click',async function(){
+ const b=this, old=b.textContent; b.disabled=true; b.textContent='傳送中…';
+ try{
+  const r=await fetch('https://xiste-vercel-v2.vercel.app/api/line-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'系統測試',phone:'測試',location:'洗思特加盟網站',note:'LINE 私人通知測試成功',source:'網站測試按鈕'})});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(d.error||('HTTP '+r.status));
+  alert('已送出！請檢查你的私人 LINE。');
+ }catch(e){alert('傳送失敗：'+e.message);}
+ finally{b.disabled=false;b.textContent=old;}
+});
+</script>
 <!-- deployment-test-2 -->
 </body>
 </html>
