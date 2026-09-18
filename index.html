@@ -950,21 +950,75 @@ if(menuBtn&&siteMenu){
  document.addEventListener('click',e=>{if(!siteMenu.contains(e.target)&&e.target!==menuBtn){siteMenu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}});
 }
 </script>
-<div id="lineTestBox" style="position:fixed;right:14px;bottom:14px;z-index:9999">
-<button id="lineTestBtn" type="button" style="border:0;border-radius:999px;padding:12px 16px;font-weight:700;box-shadow:0 4px 18px #0003;cursor:pointer">測試 LINE 通知</button>
+<style>
+#quoteFab{position:fixed;right:14px;bottom:14px;z-index:9998;border:0;border-radius:999px;padding:13px 18px;background:#00C755;color:#fff;font-weight:900;font-size:15px;box-shadow:0 8px 24px rgba(0,199,85,.32);cursor:pointer}
+#quoteModal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.72);padding:18px;overflow:auto}
+#quoteModal.open{display:flex;align-items:flex-start;justify-content:center}
+.quote-panel{width:min(100%,560px);margin:auto;background:#111A2E;border:1px solid #25355C;border-radius:20px;padding:24px;color:#fff;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.quote-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:18px}.quote-head h3{font-size:22px;color:#FFD166}.quote-close{border:0;background:transparent;color:#fff;font-size:28px;cursor:pointer;line-height:1}
+.quote-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.quote-field{display:flex;flex-direction:column;gap:6px}.quote-field.full{grid-column:1/-1}.quote-field label{font-size:13px;font-weight:800;color:#E2E8F0}.quote-field input,.quote-field select,.quote-field textarea{width:100%;border:1px solid #25355C;border-radius:10px;background:#0B1220;color:#fff;padding:12px;font-size:16px}.quote-field textarea{min-height:82px;resize:vertical}
+.quote-submit{width:100%;margin-top:16px;border:0;border-radius:12px;padding:14px;background:linear-gradient(135deg,#FFD166,#FFB020);color:#111A2E;font-weight:900;font-size:16px;cursor:pointer}.quote-submit:disabled{opacity:.6}
+.quote-note{font-size:12px;color:#9AA5C7;margin-top:10px;line-height:1.6}.quote-success{display:none;text-align:center}.quote-success.show{display:block}.quote-success .qid{font-size:21px;font-weight:900;color:#FFD166;margin:12px 0}.quote-line{display:block;text-decoration:none;background:#00C755;color:#fff;padding:14px;border-radius:12px;font-weight:900;margin-top:14px}.quote-copy{width:100%;border:1px solid #25355C;background:#14213D;color:#fff;padding:12px;border-radius:12px;font-weight:800;margin-top:10px;cursor:pointer}
+@media(max-width:560px){.quote-form-grid{grid-template-columns:1fr}.quote-field.full{grid-column:auto}.quote-panel{padding:20px}.quote-head h3{font-size:20px}}
+</style>
+<button id="quoteFab" type="button">免費取得加盟報價</button>
+<div id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="quoteTitle">
+ <div class="quote-panel">
+  <div id="quoteFormWrap">
+   <div class="quote-head"><div><h3 id="quoteTitle">取得洗思特加盟報價</h3><div style="color:#9AA5C7;font-size:13px;margin-top:4px">留下基本資料，我們會依你的開店條件進一步聯繫。</div></div><button class="quote-close" id="quoteClose" aria-label="關閉">×</button></div>
+   <form id="quoteInquiryForm">
+    <div class="quote-form-grid">
+     <div class="quote-field"><label for="inqName">姓名 *</label><input id="inqName" maxlength="30" required autocomplete="name"></div>
+     <div class="quote-field"><label for="inqPhone">手機 *</label><input id="inqPhone" inputmode="tel" maxlength="10" placeholder="09xxxxxxxx" required autocomplete="tel"></div>
+     <div class="quote-field full"><label for="inqLocation">預計開店地區 *</label><input id="inqLocation" maxlength="60" placeholder="例如：台南市永康區" required></div>
+     <div class="quote-field"><label for="inqStore">目前店面狀況</label><select id="inqStore"><option>尋找中</option><option>已有店面</option><option>尚未開始找</option></select></div>
+     <div class="quote-field"><label for="inqBudget">預計預算</label><select id="inqBudget"><option value="">尚未確定</option><option>200 萬以下</option><option>200–300 萬</option><option>300–400 萬</option><option>400 萬以上</option></select></div>
+     <div class="quote-field full"><label for="inqNote">其他需求（選填）</label><textarea id="inqNote" maxlength="300" placeholder="例如：已有店面，希望協助評估設備配置"></textarea></div>
+    </div>
+    <button class="quote-submit" id="quoteSubmit" type="submit">送出加盟詢價</button>
+    <div class="quote-note">送出後會產生詢價編號，並將本頁目前的試算摘要一併提供給洗思特加盟業務。正式價格與方案以後續報價為準。</div>
+   </form>
+  </div>
+  <div id="quoteSuccess" class="quote-success">
+   <div style="font-size:42px">✓</div><h3 style="color:#39FF86;font-size:23px">詢價已送出</h3>
+   <p style="color:#E2E8F0;margin-top:8px">請記下你的詢價編號：</p><div class="qid" id="quoteIdDisplay"></div>
+   <p style="color:#E2E8F0;font-size:14px">下一步加入業務 LINE，貼上詢價編號，我們就能更快接續你的資料。</p>
+   <button id="copyInquiryMsg" class="quote-copy" type="button">複製 LINE 詢價訊息</button>
+   <a class="quote-line" href="https://line.me/ti/p/OtHSgi9biU" target="_blank" rel="noopener noreferrer">加入業務 LINE</a>
+   <button id="quoteDone" class="quote-copy" type="button">完成</button>
+  </div>
+ </div>
 </div>
 <script>
-document.getElementById('lineTestBtn')?.addEventListener('click',async function(){
- const b=this, old=b.textContent; b.disabled=true; b.textContent='傳送中…';
- try{
-  const r=await fetch('https://xiste-vercel-v2.vercel.app/api/line-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'系統測試',phone:'測試',location:'洗思特加盟網站',note:'LINE 私人通知測試成功',source:'網站測試按鈕'})});
-  const d=await r.json().catch(()=>({}));
-  if(!r.ok) throw new Error(d.error||('HTTP '+r.status));
-  alert('已送出！請檢查你的私人 LINE。');
- }catch(e){alert('傳送失敗：'+e.message);}
- finally{b.disabled=false;b.textContent=old;}
-});
+(function(){
+ const modal=document.getElementById('quoteModal'), fab=document.getElementById('quoteFab'), close=document.getElementById('quoteClose'), form=document.getElementById('quoteInquiryForm'), submit=document.getElementById('quoteSubmit');
+ let inquiryId='', lineMessage='';
+ const open=()=>{document.getElementById('quoteFormWrap').style.display='block';document.getElementById('quoteSuccess').classList.remove('show');modal.classList.add('open');document.body.style.overflow='hidden';};
+ const shut=()=>{modal.classList.remove('open');document.body.style.overflow='';};
+ fab.addEventListener('click',open); close.addEventListener('click',shut); document.getElementById('quoteDone').addEventListener('click',shut);
+ modal.addEventListener('click',e=>{if(e.target===modal)shut();});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')shut();});
+ function makeId(){const d=new Date(),p=n=>String(n).padStart(2,'0');return 'Q'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'-'+p(d.getHours())+p(d.getMinutes())+p(d.getSeconds());}
+ function t(id){return document.getElementById(id)?.innerText?.trim()||'—';}
+ form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const name=document.getElementById('inqName').value.trim(), phone=document.getElementById('inqPhone').value.trim(), location=document.getElementById('inqLocation').value.trim();
+  if(!/^09\\d{8}$/.test(phone)){alert('請輸入正確的台灣手機號碼（09 開頭，共 10 碼）。');return;}
+  inquiryId=makeId();
+  const store=document.getElementById('inqStore').value, budget=document.getElementById('inqBudget').value||'尚未確定', note=document.getElementById('inqNote').value.trim()||'無';
+  const summary=['詢價編號：'+inquiryId,'店面狀況：'+store,'預算：'+budget,'客戶備註：'+note,'','目前網站試算摘要','總投資：'+t('totalInvestDisplay'),'穩定期月營收：'+t('monthRevenueDisplay'),'穩定期月淨利：'+t('monthProfitDisplay'),'回本期：'+t('paybackDisplay'),'年化 ROI：'+t('roiDisplay'),'設備：22kg '+(document.getElementById('wash22')?.value||0)+' 台／27kg '+(document.getElementById('wash27')?.value||0)+' 台／雙層烘乾 '+(document.getElementById('dry')?.value||0)+' 組'].join('\\n');
+  submit.disabled=true;submit.textContent='送出中…';
+  try{
+   const r=await fetch('/api/line-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone,location,note:summary,source:'洗思特官網加盟詢價'})});
+   const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||('HTTP '+r.status));
+   lineMessage='您好，我剛剛完成洗思特加盟詢價，我的詢價編號是 '+inquiryId+'，想進一步了解設備與開店方案。';
+   document.getElementById('quoteIdDisplay').textContent=inquiryId;document.getElementById('quoteFormWrap').style.display='none';document.getElementById('quoteSuccess').classList.add('show');
+  }catch(err){alert('詢價暫時無法送出，請稍後再試，或直接加入 LINE 聯繫。');}
+  finally{submit.disabled=false;submit.textContent='送出加盟詢價';}
+ });
+ document.getElementById('copyInquiryMsg').addEventListener('click',async function(){try{await navigator.clipboard.writeText(lineMessage);this.textContent='已複製，請到 LINE 貼上';}catch(e){prompt('請複製以下訊息：',lineMessage);}});
+})();
 </script>
-<!-- deployment-test-2 -->
+<!-- inquiry-flow-v1 -->
 </body>
 </html>
