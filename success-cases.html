@@ -15,7 +15,7 @@
 .revenue{margin:19px 0 16px;padding:15px 16px;border-radius:15px;background:#f0fdf4}.revenue small{display:block;color:#64748b}.revenue strong{display:block;margin-top:3px;color:#15803d;font-size:23px}
 .tags{display:flex;gap:7px;flex-wrap:wrap}.tags span{font-size:12px;font-weight:800;background:#f1f5f9;padding:7px 10px;border-radius:999px;color:#475569}
 .cta{margin-top:38px;background:#111827;color:#fff;border-radius:24px;padding:34px 22px;text-align:center}.cta h2{margin:0 0 10px;font-size:28px}.cta p{margin:0;color:#cbd5e1;line-height:1.7}.note{text-align:center;color:#94a3b8;font-size:12px;line-height:1.7;margin:22px auto 0;max-width:800px}
-@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.grid .card:last-child{grid-column:1/-1}}@media(max-width:650px){.success-page{padding:6px 14px 48px}.back{margin-bottom:6px}.hero{padding:0 0 18px}.hero h1{font-size:38px;margin:6px 0 12px}.hero p{font-size:16px;line-height:1.75}.proof{margin-top:16px;padding:10px 14px;font-size:15px}.grid{grid-template-columns:1fr;gap:18px}.grid .card:last-child{grid-column:auto}.photo{height:auto;aspect-ratio:16/10}.body{padding:20px}}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.grid .card:last-child{grid-column:1/-1}}@media(max-width:650px){.success-page{padding:6px 14px 48px}.back{margin-bottom:6px}.hero{min-height:0!important;height:auto!important;display:block!important;padding:0 0 18px!important}.hero h1{font-size:38px;margin:6px 0 12px}.hero p{font-size:16px;line-height:1.75}.proof{margin-top:16px;padding:10px 14px;font-size:15px}.grid{grid-template-columns:1fr;gap:18px}.grid .card:last-child{grid-column:auto}.photo{height:auto;aspect-ratio:16/10}.body{padding:20px}}
 </style>
 </head>
 <body><main class="success-page"><div class="wrap">
@@ -45,7 +45,7 @@
   requestAnimationFrame(tick);
  };
  if('IntersectionObserver' in window){
-  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){animate(entry.target);observer.unobserve(entry.target);}}),{threshold:.45});
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){animate(entry.target);observer.unobserve(entry.target);}}),{threshold:.05});
   counters.forEach(el=>observer.observe(el));
  }else counters.forEach(animate);
 })();
