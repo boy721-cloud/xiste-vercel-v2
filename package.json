@@ -1,1 +1,1 @@
-{"name":"xiste-franchise","version":"1.0.0","private":true,"scripts":{"build":"mkdir -p dist && cp index.html styles.css script.js success-cases.html dist/ && cp -r assets dist/"},"devDependencies":{}}
+{"name":"xiste-franchise","version":"1.0.0","private":true,"scripts":{"build":"mkdir -p dist/assets && cp index.html styles.css script.js success-cases.html dist/ && cp assets/case-01.jpg assets/case-02.jpg assets/case-03.jpg dist/assets/"},"devDependencies":{}}
