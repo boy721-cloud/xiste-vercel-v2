@@ -149,7 +149,7 @@
     background:var(--accent);
     border-radius:3px;
   }
-  .card {
+  html { scroll-behavior:smooth; scroll-padding-top:90px; }\n  .card {
     background:linear-gradient(180deg, var(--card-2), var(--card));
     border:1px solid var(--line);
     border-radius:20px;
@@ -372,7 +372,7 @@
   <div class="container hero-content">
     <h2>把開店這件事，<br><span>先算清楚再開始。</span></h2>
     <p>從店租、設備投資到營收預估，用清楚的數字規劃你的自助洗衣事業。</p>
-    <a href="#resultWrap" class="btn-jump">立即試算回本期</a>
+    <a href="#settingsWrap" class="btn-jump">立即試算回本期</a>
   </div>
 </section>
 
@@ -404,7 +404,7 @@
     <p class="note-text">協助你快速估算投資門檻、預期收益與回收週期。實際營運數字會因地點、機台數量、營運模式與當地消費能力而有所不同。</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="settingsWrap">
     <h3 class="section-title">投資參數設定</h3>
     <div class="note-text">洗脫烘最低單次 NT$120；獨立烘乾每組含2台，單台單次平均 NT$50。</div>
 
