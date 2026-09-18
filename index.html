@@ -447,11 +447,20 @@
 
     <div class="setting-item">
       <div class="setting-row">
-        <div class="setting-name">洗脫烘機台數</div>
-        <div class="setting-num" id="washVal"></div>
+        <div class="setting-name">22 公斤大型洗脫烘機台數</div>
+        <div class="setting-num" id="wash22Val"></div>
       </div>
-      <input type="range" id="wash" min="4" max="15" value="5" oninput="calculateInvest()" />
-      <details class="setting-help"><summary>查看建議配置</summary><div>小型店 4～5 台｜中型店 6～9 台｜大型店 10 台以上</div></details>
+      <input type="range" id="wash22" min="0" max="15" value="4" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看設備說明</summary><div>22 公斤大型洗脫烘，設備參考單價 NT$360,000／台。</div></details>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">27 公斤特大型洗脫烘機台數</div>
+        <div class="setting-num" id="wash27Val"></div>
+      </div>
+      <input type="range" id="wash27" min="0" max="15" value="1" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看設備說明</summary><div>27 公斤特大型洗脫烘，設備參考單價 NT$390,000／台。兩種洗脫烘合計建議至少 4 台。</div></details>
     </div>
 
     <div class="setting-item">
@@ -510,9 +519,14 @@
 
     <h4 style="margin-top:28px;margin-bottom:14px;font-size:18px;">設備與建置成本</h4>
     <div class="setting-item">
-      <div class="setting-name">商用洗脫烘單台設備成本（NT$）</div>
-      <input type="number" id="washUnitCost" min="0" value="360000" oninput="calculateInvest()" />
-      <details class="setting-help"><summary>查看設備價格與規格</summary><div><strong>22 公斤大型洗脫烘：NT$360,000／台</strong><br>27 公斤特大型洗脫烘：NT$390,000／台<br><span style="display:block;margin-top:7px;">220V 單相、觸控操作、瓦斯型；實際機型與配置依加盟店型規劃及正式報價為準。</span></div></details>
+      <div class="setting-name">22 公斤大型洗脫烘單台成本（NT$）</div>
+      <input type="number" id="wash22UnitCost" min="0" value="360000" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看規格</summary><div>22 公斤大型洗脫烘：220V 單相、觸控操作、瓦斯型。實際配置以正式報價為準。</div></details>
+    </div>
+    <div class="setting-item">
+      <div class="setting-name">27 公斤特大型洗脫烘單台成本（NT$）</div>
+      <input type="number" id="wash27UnitCost" min="0" value="390000" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看規格</summary><div>27 公斤特大型洗脫烘：220V 單相、觸控操作、瓦斯型。實際配置以正式報價為準。</div></details>
     </div>
     <div class="setting-item">
       <div class="setting-name">雙層獨立烘乾機每組設備成本（NT$）</div>
@@ -545,7 +559,7 @@
     </div>
 
     <div class="summary-box">
-      <div class="summary-row"><span>洗脫烘設備</span><strong id="washInvest"></strong></div>
+      <div class="summary-row"><span>大型＋特大型洗脫烘設備</span><strong id="washInvest"></strong></div>
       <div class="summary-row"><span>獨立烘乾設備</span><strong id="dryInvest"></strong></div>
       <div class="summary-row"><span>工程與其他建置</span><strong id="fixedInvest"></strong></div>
       <div class="summary-row summary-total"><span>自動計算總投資</span><strong id="autoInvestDisplay"></strong></div>
@@ -688,7 +702,9 @@ function formatCurrency(num){
 
 function calculateInvest(){
   const price = Number(document.getElementById('price').value);
-  const washCount = Number(document.getElementById('wash').value);
+  const wash22Count = Number(document.getElementById('wash22').value);
+  const wash27Count = Number(document.getElementById('wash27').value);
+  const washCount = wash22Count + wash27Count;
   const dryGroup = Number(document.getElementById('dry').value);
   const dryPrice = Number(document.getElementById('dryPrice').value);
   const turn = Number(document.getElementById('turn').value);
@@ -697,7 +713,8 @@ function calculateInvest(){
   const rent = Number(document.getElementById('rent').value);
   const monthlyOther = Number(document.getElementById('monthlyOther').value);
 
-  const washUnitCost = Number(document.getElementById('washUnitCost').value);
+  const wash22UnitCost = Number(document.getElementById('wash22UnitCost').value);
+  const wash27UnitCost = Number(document.getElementById('wash27UnitCost').value);
   const dryUnitCost = Number(document.getElementById('dryUnitCost').value);
   const costWaterElec = Number(document.getElementById('costWaterElec').value);
   const costDecoration = Number(document.getElementById('costDecoration').value);
@@ -715,7 +732,8 @@ function calculateInvest(){
   const customInvestVal = Number(document.getElementById('customInvest').value);
 
   document.getElementById('priceVal').innerText = price;
-  document.getElementById('washVal').innerText = washCount;
+  document.getElementById('wash22Val').innerText = wash22Count;
+  document.getElementById('wash27Val').innerText = wash27Count;
   document.getElementById('dryVal').innerText = dryGroup;
   document.getElementById('dryPriceVal').innerText = dryPrice;
   document.getElementById('turnVal').innerText = turn;
@@ -738,7 +756,7 @@ function calculateInvest(){
 
   const monthProfitStable = stableRevenue - utilTotal - rent - monthlyOther;
 
-  const washInvestTotal = washCount * washUnitCost;
+  const washInvestTotal = (wash22Count * wash22UnitCost) + (wash27Count * wash27UnitCost);
   const dryInvestTotal = dryGroup * dryUnitCost;
   const fixedCostTotal = costWaterElec + costDecoration + costGas + costSignDesign + costDuct + costOther;
   const autoTotalInvest = washInvestTotal + dryInvestTotal + fixedCostTotal;
