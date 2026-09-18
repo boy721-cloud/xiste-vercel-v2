@@ -17,7 +17,7 @@
     .success-hero p { max-width:720px; margin:0 auto; color:#64748b; font-size:17px; line-height:1.8; }
     .success-highlight { display:inline-block; margin-top:22px; padding:10px 18px; border-radius:999px; background:#e8f1ff; color:#1d4ed8; font-weight:800; }
     .case-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
-    .case-card { background:#fff; border-radius:24px; padding:28px; box-shadow:0 10px 35px rgba(15,23,42,.08); border:1px solid #e5e7eb; }
+    .case-card { background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 10px 35px rgba(15,23,42,.08); border:1px solid #e5e7eb; } .case-photo{position:relative;aspect-ratio:16/10;overflow:hidden;background:#e2e8f0}.case-photo img{width:100%;height:100%;object-fit:cover;display:block}.case-photo.one img{object-position:center 55%}.case-photo.two img{object-position:center 60%}.case-body{padding:28px}.photo-badge{position:absolute;left:14px;top:14px;background:rgba(15,23,42,.82);color:#fff;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:800}
     .case-location { display:inline-block; font-size:14px; font-weight:800; color:#2563eb; margin-bottom:10px; }
     .case-card h2 { margin:0 0 12px; color:#111827; font-size:24px; }
     .case-card p { color:#64748b; line-height:1.8; }
@@ -34,7 +34,7 @@
     @media (max-width:720px) {
       .success-page { padding:30px 16px 60px; }
       .case-grid { grid-template-columns:1fr; }
-      .case-card { padding:22px; }
+      .case-body { padding:22px; }
     }
   </style>
 </head>
@@ -56,7 +56,7 @@
         <div class="case-tags"><span>24小時營業</span><span>洗脫烘服務</span><span>寵物專用</span></div>
         <div class="map-button" style="cursor:default">實際加盟營運案例</div>
       </article>
-      <article class="case-card">
+      <article class="case-card"><div class="case-photo two"><img src="assets/case-02.jpg" alt="洗思特實際加盟門市招牌"><span class="photo-badge">實際加盟門市</span></div><div class="case-body">
         <div class="case-location">實績案例 02｜成長型住宅商圈</div>
         <h2>新興生活圈門市｜設備配置到位</h2>
         <p>從設備數量、容量組合到動線規劃，以實際消費需求為出發點，打造便利、舒適且具長期營運效率的24小時自助洗衣空間。</p>
