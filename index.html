@@ -68,6 +68,14 @@
     letter-spacing:1px;
     margin-top:2px;
   }
+  .header-actions{display:flex;align-items:center;gap:10px}
+  .menu-wrap{position:relative}
+  .menu-btn{width:42px;height:42px;border:1px solid var(--line-strong);border-radius:11px;background:var(--card-2);color:#fff;display:grid;place-items:center;cursor:pointer}
+  .menu-btn span,.menu-btn span::before,.menu-btn span::after{display:block;width:19px;height:2px;background:currentColor;border-radius:2px;content:"";position:relative}
+  .menu-btn span::before{position:absolute;top:-6px}.menu-btn span::after{position:absolute;top:6px}
+  .site-menu{display:none;position:absolute;right:0;top:50px;width:230px;background:var(--card);border:1px solid var(--line-strong);border-radius:14px;padding:8px;box-shadow:0 18px 40px rgba(0,0,0,.35);z-index:100}
+  .site-menu.open{display:block}.site-menu a{display:block;color:var(--text-2);text-decoration:none;padding:12px 13px;border-radius:9px;font-weight:700;font-size:14px}
+  .site-menu a:hover,.site-menu a:focus{background:rgba(255,255,255,.06);color:#fff}.site-menu .quote-link{color:var(--accent)}
   .tag-recruit {
     font-size:11px;
     color:var(--accent);
@@ -378,7 +386,19 @@
       <h1>SISTER</h1>
       <small>洗思特自助洗衣</small>
     </div>
-    <a class="tag-recruit" href="https://line.me/ti/p/OtHSgi9biU" target="_blank" rel="noopener noreferrer" aria-label="加入洗思特 LINE 諮詢加盟">加盟招募中</a>
+    <div class="header-actions">
+      <a class="tag-recruit" href="https://line.me/ti/p/OtHSgi9biU" target="_blank" rel="noopener noreferrer" aria-label="加入洗思特 LINE 諮詢加盟">加盟招募中</a>
+      <div class="menu-wrap">
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="開啟網站選單" aria-expanded="false"><span></span></button>
+        <nav class="site-menu" id="siteMenu" aria-label="網站選單">
+          <a href="#resultWrap">加盟資訊</a>
+          <a href="#settingsWrap">投資試算</a>
+          <a class="quote-link" href="https://xiste-quotation.vercel.app">加盟設備報價</a>
+          <a href="#qa">常見問題</a>
+          <a href="https://line.me/ti/p/OtHSgi9biU" target="_blank" rel="noopener noreferrer">LINE 加盟諮詢</a>
+        </nav>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -868,6 +888,12 @@ window.onload = function(){
     if(ml) ml.textContent=(m+1)+' 月';
     if(cd) cd.textContent=days<=7 ? '本月評估名額即將截止｜剩 '+days+' 天' : '距本月評估截止還有 '+days+' 天';
   }
+const menuBtn=document.getElementById('menuBtn'),siteMenu=document.getElementById('siteMenu');
+if(menuBtn&&siteMenu){
+ menuBtn.addEventListener('click',e=>{e.stopPropagation();const open=siteMenu.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));});
+ siteMenu.addEventListener('click',()=>{siteMenu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');});
+ document.addEventListener('click',e=>{if(!siteMenu.contains(e.target)&&e.target!==menuBtn){siteMenu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}});
+}
 </script>
 </body>
 </html>
