@@ -364,7 +364,7 @@
 </style>
 </head>
 <body>
-<div class="banner-top">免費場地開店評估｜本月名額有限，點下方LINE搶評估資格</div>
+<div class="banner-top">免費場地開店評估｜<span id="monthLabel">本月</span>名額倒數<br><span id="monthCountdown" style="font-size:.88em;font-weight:700;">距本月評估截止還有 -- 天</span></div>
 <div class="header-bar">
   <div class="container header-inner">
     <div class="brand">
@@ -967,6 +967,18 @@ window.onload = function(){
   toggleCustomInvest();
   calculateInvest();
 }
+
+  function updateMonthlyCountdown(){
+    const now=new Date();
+    const y=now.getFullYear(), m=now.getMonth();
+    const end=new Date(y,m+1,1);
+    const days=Math.max(0,Math.ceil((end-now)/86400000));
+    const ml=document.getElementById('monthLabel');
+    const cd=document.getElementById('monthCountdown');
+    if(ml) ml.textContent=(m+1)+' 月';
+    if(cd) cd.textContent=days<=7 ? '本月評估名額即將截止｜剩 '+days+' 天' : '距本月評估截止還有 '+days+' 天';
+  }
+  updateMonthlyCountdown();
 </script>
 </body>
 </html>
