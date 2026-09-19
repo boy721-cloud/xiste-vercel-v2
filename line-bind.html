@@ -7,8 +7,9 @@
 <title>洗思特加盟業務 LINE 綁定</title>
 <style>
 body{font-family:Arial,"Noto Sans TC",sans-serif;background:#f5f7fa;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;color:#222}
-.card{background:white;width:90%;max-width:420px;padding:36px;border-radius:20px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-.logo{font-size:28px;font-weight:700;color:#1d4ed8;margin-bottom:20px}.btn{display:block;background:#06c755;color:white;padding:15px;border-radius:12px;text-decoration:none;font-weight:bold;margin-top:25px}
+.card{background:#fff;width:90%;max-width:420px;padding:36px;border-radius:20px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.logo{font-size:28px;font-weight:700;color:#1d4ed8;margin-bottom:20px}
+.btn{display:block;background:#06c755;color:#fff;padding:15px;border-radius:12px;text-decoration:none;font-weight:bold;margin-top:25px}
 .note{font-size:14px;color:#666;line-height:1.8;margin-top:20px}
 </style>
 </head>
@@ -17,8 +18,33 @@ body{font-family:Arial,"Noto Sans TC",sans-serif;background:#f5f7fa;display:flex
 <div class="logo">洗思特</div>
 <h2>加盟業務 LINE 綁定</h2>
 <p>綁定後，您將可接收加盟客戶詢問通知。</p>
-<a class="btn" href="#">使用 LINE 登入綁定</a>
+<a id="lineLogin" class="btn">使用 LINE 登入綁定</a>
+<p id="status" class="note">尚未綁定</p>
 <div class="note">此頁面提供加盟業務使用，不會顯示於官方網站公開頁面。</div>
 </div>
+<script>
+const channelId = "";
+const callback = `${location.origin}/api/line-bind`;
+
+document.getElementById('lineLogin').onclick = () => {
+ if(!channelId){
+  document.getElementById('status').innerText='尚未設定 LINE Login Channel ID';
+  return;
+ }
+ const url = 'https://access.line.me/oauth2/v2.1/authorize?' + new URLSearchParams({
+  response_type:'code',
+  client_id:channelId,
+  redirect_uri:callback,
+  state:'sales_bind',
+  scope:'profile'
+ });
+ location.href=url;
+};
+
+const params=new URLSearchParams(location.search);
+if(params.get('success')){
+ document.getElementById('status').innerText='LINE 綁定完成';
+}
+</script>
 </body>
 </html>
