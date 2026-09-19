@@ -8,7 +8,11 @@ module.exports = async function handler(req, res) {
 
   const token = process.env.LINE_CHANNEL_ACCESS_TOKEN;
   const adminUserId = process.env.LINE_ADMIN_USER_ID;
-  const salesUserId = process.env.LINE_SALES_USER_ID;
+  const salesUsers = String(process.env.LINE_SALES_USER_IDS || process.env.LINE_SALES_USER_ID || '')
+    .split(',')
+    .map(id => id.trim())
+    .filter(Boolean);
+
   if (!token || !adminUserId) return res.status(500).json({ ok:false, error:'LINE environment variables missing' });
 
   const body = req.body || {};
@@ -37,8 +41,7 @@ module.exports = async function handler(req, res) {
     source
   ].join('\n');
 
-  const recipients = [adminUserId];
-  if (salesUserId) recipients.push(salesUserId);
+  const recipients = [adminUserId, ...salesUsers].filter((id, index, arr) => arr.indexOf(id) === index);
 
   try {
     for (const userId of recipients) {
