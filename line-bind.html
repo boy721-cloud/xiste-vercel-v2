@@ -19,12 +19,23 @@ body{font-family:Arial,"Noto Sans TC",sans-serif;background:#f5f7fa;display:flex
 <h2>加盟業務 LINE 綁定</h2>
 <p>綁定後，您將可接收加盟客戶詢問通知。</p>
 <a id="lineLogin" class="btn">使用 LINE 登入綁定</a>
-<p id="status" class="note">尚未綁定</p>
+<p id="status" class="note">載入 LINE Login 設定中...</p>
 <div class="note">此頁面提供加盟業務使用，不會顯示於官方網站公開頁面。</div>
 </div>
 <script>
-const channelId = "";
+let channelId = '';
 const callback = `${location.origin}/api/line-bind`;
+
+async function loadConfig(){
+ try{
+  const response = await fetch('/api/config');
+  const config = await response.json();
+  channelId = config.LINE_LOGIN_CHANNEL_ID || '';
+  document.getElementById('status').innerText = channelId ? '尚未綁定' : '尚未設定 LINE Login Channel ID';
+ }catch(e){
+  document.getElementById('status').innerText='LINE Login 設定載入失敗';
+ }
+}
 
 document.getElementById('lineLogin').onclick = () => {
  if(!channelId){
@@ -45,6 +56,8 @@ const params=new URLSearchParams(location.search);
 if(params.get('success')){
  document.getElementById('status').innerText='LINE 綁定完成';
 }
+
+loadConfig();
 </script>
 </body>
 </html>
