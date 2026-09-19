@@ -7,8 +7,9 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ ok:false, error:'Method not allowed' });
 
   const token = process.env.LINE_CHANNEL_ACCESS_TOKEN;
-  const userId = process.env.LINE_ADMIN_USER_ID;
-  if (!token || !userId) return res.status(500).json({ ok:false, error:'LINE environment variables missing' });
+  const adminUserId = process.env.LINE_ADMIN_USER_ID;
+  const salesUserId = process.env.LINE_SALES_USER_ID;
+  if (!token || !adminUserId) return res.status(500).json({ ok:false, error:'LINE environment variables missing' });
 
   const body = req.body || {};
   const name = String(body.name || '').trim().slice(0,60);
@@ -36,22 +37,27 @@ module.exports = async function handler(req, res) {
     source
   ].join('\n');
 
+  const recipients = [adminUserId];
+  if (salesUserId) recipients.push(salesUserId);
+
   try {
-    const response = await fetch('https://api.line.me/v2/bot/message/push', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + token,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        to: userId,
-        messages: [{ type:'text', text:text.slice(0,5000) }]
-      })
-    });
-    if (!response.ok) {
-      const detail = await response.text();
-      console.error('LINE push failed', response.status, detail);
-      return res.status(502).json({ ok:false, error:'LINE push failed' });
+    for (const userId of recipients) {
+      const response = await fetch('https://api.line.me/v2/bot/message/push', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          to: userId,
+          messages: [{ type:'text', text:text.slice(0,5000) }]
+        })
+      });
+      if (!response.ok) {
+        const detail = await response.text();
+        console.error('LINE push failed', response.status, detail);
+        return res.status(502).json({ ok:false, error:'LINE push failed' });
+      }
     }
     return res.status(200).json({ ok:true });
   } catch (err) {
