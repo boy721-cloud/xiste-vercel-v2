@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>洗思特｜淨利 & 回本期快速試算</title>
+<meta name="description" content="洗思特自助洗衣加盟｜淨利、回本期與投資金額快速試算">
+<meta property="og:title" content="洗思特｜淨利 & 回本期快速試算">
+<meta property="og:description" content="洗思特自助洗衣加盟｜淨利、回本期與投資金額快速試算">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xiste-vercel-v2.vercel.app/">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #070B14;
+    --card: #111A2E;
+    --card-2: #14213D;
+    --line: #1F2A44;
+    --line-strong: #25355C;
+    --text: #FFFFFF;
+    --text-2: #E2E8F0;
+    --text-muted: #9AA5C7;
+    --accent: #FFD166;
+    --accent-2: #FFB020;
+    --accent-3: #FF8A00;
+    --success: #39FF86;
+    --danger: #FF4D4F;
+  }
+  body {
+    font-family: "Microsoft JhengHei", "PingFang TC", "Segoe UI", "Noto Sans TC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    width: 92%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .banner-top {
+    background: linear-gradient(90deg, #FFD166, #FFB020);
+    color: #070B14;
+    text-align:center;
+    padding:12px 16px;
+    font-weight:900;
+    font-size:16px;
+  }
+  .header-bar {
+    background: var(--card);
+    border-bottom:1px solid var(--line);
+    padding:14px 0;
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .header-inner {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .brand h1 {
+    font-family: "Impact","Arial Black",sans-serif;
+    font-weight:900;
+    font-size:18px;
+    letter-spacing:2px;
+    color:var(--accent);
+  }
+  .brand small {
+    display:block;
+    font-size:10px;
+    color:var(--text-2);
+    letter-spacing:1px;
+    margin-top:2px;
+  }
+  .header-actions{display:flex;align-items:center;gap:10px}
+  .menu-wrap{position:relative}
+  .menu-btn{width:42px;height:42px;border:1px solid var(--line-strong);border-radius:11px;background:var(--card-2);color:#fff;display:grid;place-items:center;cursor:pointer}
+  .menu-btn span,.menu-btn span::before,.menu-btn span::after{display:block;width:19px;height:2px;background:currentColor;border-radius:2px;content:"";position:relative}
+  .menu-btn span::before{position:absolute;top:-6px}.menu-btn span::after{position:absolute;top:6px}
+  .site-menu{display:none;position:absolute;right:0;top:50px;width:230px;background:var(--card);border:1px solid var(--line-strong);border-radius:14px;padding:8px;box-shadow:0 18px 40px rgba(0,0,0,.35);z-index:100}
+  .site-menu.open{display:block}.site-menu a{display:block;color:var(--text-2);text-decoration:none;padding:12px 13px;border-radius:9px;font-weight:700;font-size:14px}
+  .site-menu a:hover,.site-menu a:focus{background:rgba(255,255,255,.06);color:#fff}.site-menu .quote-link{color:var(--accent)}
+  .tag-recruit {
+    font-size:11px;
+    color:var(--accent);
+    border:1px solid var(--accent);
+    padding:5px 12px;
+    border-radius:20px;
+    background:rgba(255,209,102,0.08);
+    font-weight:700;
+  }
+  .hero {
+    position:relative;
+    padding:56px 0 40px;
+    background:
+      radial-gradient(circle at top right, rgba(255,209,102,0.18), transparent 45%),
+      linear-gradient(180deg, rgba(11,18,32,0.96), rgba(7,11,20,0.98));
+    overflow:visible;
+  }
+  .hero-content {
+    position:relative;
+    z-index:2;
+    max-width:640px;
+  }
+  .hero h2 {
+    font-size:32px;
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:16px;
+    letter-spacing:0.5px;
+  }
+  .hero h2 span {
+    color:var(--accent);
+    position:relative;
+  }
+  .hero h2 span::after {
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:6px;
+    height:10px;
+    background:linear-gradient(90deg, rgba(255,209,102,0.35), rgba(255,176,32,0.15));
+    z-index:-1;
+    border-radius:4px;
+  }
+  .hero p {
+    font-size:15px;
+    color:var(--text-2);
+    margin-bottom:28px;
+    max-width:480px;
+  }
+  .btn-jump {
+    display:inline-block;
+    background:linear-gradient(135deg, var(--accent), var(--accent-2));
+    color:#111A2E;
+    font-weight:900;
+    padding:15px 24px;
+    border-radius:12px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    font-size:16px;
+    letter-spacing:0.5px;
+    box-shadow:0 10px 24px rgba(255,176,32,0.25);
+  }
+  .btn-jump:hover {
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px rgba(255,176,32,0.35);
+  }
+  .section-title {
+    font-size:22px;
+    margin-bottom:20px;
+    font-weight:900;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-title::before {
+    content:"";
+    width:5px;
+    height:22px;
+    background:var(--accent);
+    border-radius:3px;
+  }
+  html { scroll-behavior:smooth; scroll-padding-top:90px; }
+  .card {
+    background:linear-gradient(180deg, var(--card-2), var(--card));
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:28px;
+    margin-bottom:24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before {
+    content:"";
+    position:absolute;
+    left:0;top:0;
+    width:4px;height:100%;
+    background:linear-gradient(180deg, var(--accent), var(--accent-3));
+  }
+  .grid-2 {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:20px;
+  }
+  .grid-full {
+    grid-column: 1 / -1;
+  }
+  .result-item {
+    background:var(--card-2);
+    padding:20px;
+    border-radius:16px;
+    border:1px solid var(--line-strong);
+  }
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item{min-height:150px;padding:18px;border:0}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(1){background:#F4C95D;color:#172033}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(2){background:#5BC0BE;color:#071B25}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(3){background:#7C6FE8;color:#fff}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(4){background:#E86A92;color:#fff}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5){background:#F08A5D;color:#172033;grid-column:1/-1;min-height:125px;display:flex;flex-direction:column;align-items:center;text-align:center}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5) .result-label{width:100%;text-align:center}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5) .result-help{width:100%;text-align:center}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5) .result-help-body{background:#0C1930;color:#fff;font-weight:650;text-align:left;width:100%;box-sizing:border-box}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5) .result-value{font-size:36px;width:auto;text-align:center;margin-top:18px;padding:10px 22px;background:#E5E7EB;border-radius:12px;line-height:1.1;display:inline-block;font-weight:950}
+  #resultWrap #roiDisplay.roi-low{color:#D32F2F!important}
+  #resultWrap #roiDisplay.roi-mid{color:#B26A00!important}
+  #resultWrap #roiDisplay.roi-high{color:#16823A!important}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-label,
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-value{color:inherit}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-help summary{opacity:1;font-weight:900;text-decoration:none;text-underline-offset:3px;background:#0C1930;color:#FFD166;padding:6px 10px;border-radius:8px;display:inline-block;box-shadow:0 2px 0 rgba(0,0,0,.12)}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-help-body{color:inherit;background:rgba(0,0,0,.12);font-weight:650}
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(3) .result-help-body,
+  #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(4) .result-help-body{background:rgba(0,0,0,.22);color:#fff}
+  @media(max-width:480px){
+    #resultWrap > .card:not(.trust-card) .grid-2:first-of-type{grid-template-columns:1fr 1fr}
+    #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item{min-height:138px;padding:15px}
+    #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-value{font-size:25px;line-height:1.2;overflow-wrap:anywhere}
+    #resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-label{font-size:13px}
+  }
+  .result-label {
+    color:var(--text-2);
+    font-size:14px;
+    margin-bottom:8px;
+    font-weight:700;
+  }
+  .trust-quote { margin:20px 0; padding:22px; text-align:center; font-size:20px; line-height:1.65; font-weight:900; color:var(--accent); background:rgba(255,209,102,.06); border:1px solid rgba(255,209,102,.22); border-radius:14px; }
+  .trust-copy { color:var(--text-2); font-size:14px; line-height:1.75; }
+  .trust-grid .result-item { min-height:160px; }
+  .trust-details { margin-top:8px; }
+  .trust-details summary { list-style:none; }
+  .trust-details summary::-webkit-details-marker { display:none; }
+  .result-help { margin:2px 0 14px; font-size:13px; color:var(--text-muted); }
+  .result-help summary { cursor:pointer; color:var(--accent); font-weight:700; list-style:none; width:max-content; }
+  .result-help summary::-webkit-details-marker { display:none; }
+  .result-help summary::before { content:"＋ "; }
+  .result-help[open] summary::before { content:"－ "; }
+  .result-help-body { margin-top:9px; line-height:1.65; padding:10px 12px; background:rgba(255,255,255,.035); border-radius:9px; max-width:520px; }
+  .result-value {
+    font-size:24px;
+    font-weight:900;
+  }
+  .result-big .result-value {
+    font-size:44px;
+  }
+  .roi-positive { color:var(--success); }
+  .roi-negative { color:var(--danger); }
+  .note-text {
+    color:var(--text-2);
+    background:rgba(255,255,255,0.04);
+    border-left:3px solid var(--accent);
+    padding:14px 16px;
+    border-radius:10px;
+    margin-top:8px;
+  }
+  .setting-item {
+    margin-bottom:24px;
+  }
+  .setting-row {
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+  }
+  .setting-name {
+    font-weight:600;
+  }
+  .setting-num {
+    color:var(--accent-2);
+    font-weight:700;
+    background:rgba(255,209,102,0.1);
+    padding:4px 12px;
+    border-radius:8px;
+    border:1px solid rgba(255,209,102,0.25);
+  }
+  input[type="range"] {
+    width:100%;
+    accent-color:var(--accent);
+    height:6px;
+  }
+  input[type="number"] {
+    width:100%;
+    margin-top:8px;
+    padding:14px;
+    background:var(--card-2);
+    border:1px solid var(--line-strong);
+    border-radius:12px;
+    color:var(--text);
+    font-size:16px;
+  }
+  .summary-box {
+    background:var(--card-2);
+    border:1px solid var(--line-strong);
+    border-radius:14px;
+    padding:20px;
+    margin:22px 0;
+  }
+  .summary-row {
+    display:flex;
+    justify-content:space-between;
+    margin:6px 0;
+    color:var(--text-2);
+  }
+  .summary-total {
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--line-strong);
+    font-weight:700;
+  }
+  .switch-wrap {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:16px 0;
+  }
+  .hidden { display:none; }
+
+  /* ===== QA摺疊樣式（沿用原本頁面風格） ===== */
+  .qa-item {
+    border:1px solid var(--line-strong);
+    border-radius:12px;
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .qa-btn {
+    width:100%;
+    background:var(--card-2);
+    border:none;
+    color:var(--text);
+    text-align:left;
+    padding:16px 20px;
+    font-size:16px;
+    font-weight:700;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+  }
+  .qa-body {
+    padding:0 20px;
+    max-height:0;
+    overflow:hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color:var(--text-2);
+  }
+  .qa-inner {
+    padding:0 0 16px 0;
+  }
+  .qa-item.open .qa-body {
+    max-height:700px;
+    padding:0 20px 16px;
+  }
+
+  .cta-block {
+    background:#00C755;
+    text-align:center;
+    padding:32px 24px;
+    border-radius:16px;
+    margin:30px 0;
+  }
+  .cta-block h3 {
+    font-size:24px;
+    margin-bottom:10px;
+  }
+  .cta-block p {
+    color:rgba(255,255,255,0.92);
+    margin-bottom:22px;
+  }
+  .cta-link {
+    display:inline-block;
+    background:#fff;
+    color:#00873E;
+    padding:16px 32px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:900;
+    font-size:18px;
+  }
+  .disclaimer {
+    font-size:13px;
+    color:var(--text-muted);
+    line-height:1.6;
+    padding:16px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+  footer {
+    text-align:center;
+    padding:24px;
+    color:var(--text-muted);
+    border-top:1px solid var(--line);
+    background:var(--card);
+    margin-top:30px;
+  }
+
+  @media(max-width:480px){
+    .grid-2 { grid-template-columns:1fr; }
+    .card { padding:20px; }
+    .hero h2 { font-size:26px; }
+    .result-big .result-value { font-size:36px; }
+  }
+.setting-help{margin-top:10px;font-size:13px;color:var(--text-muted)}
+.setting-help summary{cursor:pointer;color:var(--accent);font-weight:700;list-style:none;width:max-content}
+.setting-help summary::-webkit-details-marker{display:none}
+.setting-help summary::before{content:"＋ ";}
+.setting-help[open] summary::before{content:"－ ";}
+.setting-help>div{margin-top:8px;line-height:1.7;padding:10px 12px;background:rgba(255,255,255,.035);border-radius:8px}
+
+/* Cross-platform branded sliders, including iPhone Safari */
+input[type="range"]{-webkit-appearance:none;appearance:none;background:transparent;height:30px;cursor:pointer}
+input[type="range"]::-webkit-slider-runnable-track{height:7px;border-radius:999px;background:#3D424B}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:#D3A12A;border:0;box-shadow:0 1px 3px rgba(0,0,0,.28);margin-top:-8.5px}
+input[type="range"]::-moz-range-track{height:7px;border-radius:999px;background:#3D424B}
+input[type="range"]::-moz-range-progress{height:7px;border-radius:999px;background:#D3A12A}
+input[type="range"]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#D3A12A;border:0;box-shadow:0 1px 3px rgba(0,0,0,.28)}
+
+/* Result-card explanation contrast fix */
+#resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(1) .result-help-body,
+#resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(2) .result-help-body{
+  color:#172033!important;background:rgba(255,255,255,.30)!important;font-weight:750;
+}
+#resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(3) .result-help-body,
+#resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(4) .result-help-body{
+  color:#FFFFFF!important;background:rgba(12,25,48,.28)!important;font-weight:750;
+}
+#resultWrap > .card:not(.trust-card) .grid-2:first-of-type .result-item:nth-child(5) .result-help-body{
+  color:#FFFFFF!important;background:#0C1930!important;font-weight:750;
+}
+</style>
+</head>
+<body>
+<div class="banner-top">免費場地開店評估｜<span id="monthLabel">本月</span>名額倒數<br><span id="monthCountdown" style="font-size:.88em;font-weight:700;">距本月評估截止還有 -- 天</span></div>
+<div class="header-bar">
+  <div class="container header-inner">
+    <div class="brand">
+      <h1>SISTER</h1>
+      <small>洗思特自助洗衣</small>
+    </div>
+    <div class="header-actions">
+      <a class="tag-recruit" href="https://line.me/ti/p/OtHSgi9biU" target="_blank" rel="noopener noreferrer" aria-label="加入洗思特 LINE 諮詢加盟">加盟招募中</a>
+      <div class="menu-wrap">
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="開啟網站選單" aria-expanded="false"><span></span></button>
+        <nav class="site-menu" id="siteMenu" aria-label="網站選單">
+          <a href="#resultWrap">加盟資訊</a>
+          <a href="#settingsWrap">投資試算</a>
+          <a class="quote-link" href="https://xiste-quotation.vercel.app">加盟設備報價</a>
+          <a href="success-cases.html">成功案例</a>
+          <a href="#qa">常見問題</a>
+          <a href="https://line.me/ti/p/OtHSgi9biU" target="_blank" rel="noopener noreferrer">LINE 加盟諮詢</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container hero-content">
+    <h2>把開店這件事，<br><span>先算清楚再開始。</span></h2>
+    <p>從店租、設備投資到營收預估，用清楚的數字規劃你的自助洗衣事業。</p>
+    <a href="#settingsWrap" class="btn-jump">立即試算回本期</a>
+  </div>
+</section>
+
+<div class="container" id="resultWrap">
+<div class="card trust-card">
+  <h3 class="section-title">開店最怕的，不是機器貴一點，而是出問題時不知道找誰</h3>
+  <p class="note-text">自助洗衣是長期生意。設備價格只是開店當下的一次選擇，真正影響未來營運的，是設備穩定度、零件品質、零件供應與售後服務。</p>
+  <div class="grid-2 trust-grid">
+    <div class="result-item"><div class="result-label">台灣市場 8 年實際使用經驗</div><p class="trust-copy">不是剛引進就直接交給加盟主測試。洗思特設備已在台灣市場累積 8 年使用經驗，經過實際營運環境長期使用。</p></div>
+    <div class="result-item"><div class="result-label">關鍵零組件，品質優先</div><p class="trust-copy">不為了把售價壓到最低而只追求低成本零件。我們更重視耐用度、穩定性，以及設備多年營運後的可靠度。</p></div>
+    <div class="result-item"><div class="result-label">設備來源清楚，售後有窗口</div><p class="trust-copy">加盟前不要只問「機器多少錢」，更要問「三年、五年後，機器出問題要找誰？」設備、零件與後續服務都應有清楚的對應窗口。</p></div>
+    <div class="result-item"><div class="result-label">買設備，更要看長期總成本</div><p class="trust-copy">初期省下的是一次性的設備價差；停機、等待零件與維修造成的營收損失，卻可能在開店後持續發生。</p></div>
+  </div>
+  <div class="trust-quote">便宜，是買機器那一天的事；<br>穩定，是開店之後每一天的事。</div>
+  <details class="qa-item trust-details"><summary class="qa-btn">第一次加盟，設備到底要比較什麼？ <span>＋</span></summary><div class="qa-body" style="max-height:none;padding:0 20px 16px;"><div class="qa-inner">除了報價，建議一起比較：台灣實際運轉年資、設備來源、關鍵零件品質、零件供應能力、維修服務窗口，以及長期營運總成本。價格只是其中一項。</div></div></details>
+  <p class="disclaimer" style="margin-top:16px;">設備實際規格、零件配置與服務內容，以洗思特正式提供的產品資料及加盟合約為準。</p>
+</div>
+
+<div class="card">
+    <h3 class="section-title">淨利 & 回本期快速試算</h3>
+    <div class="grid-2">
+      <div class="result-item">
+        <div class="result-label">預計月營收</div><details class="result-help"><summary>看說明</summary><div class="result-help-body">依你設定的機台數、單次價格與每日使用次數，估算門市進入穩定營運後每月可收到的總營業額；這還不是實際賺到的錢。</div></details>
+        <div class="result-value" id="monthRevenueDisplay">NT$ 0</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">預估回本期</div><details class="result-help"><summary>看說明</summary><div class="result-help-body">把前期投入的設備與工程等總投資，用每月預估淨利逐月累積回收；數字越短，代表資金回收越快。</div></details>
+        <div class="result-value" id="paybackDisplay">0 個月</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">預計月淨利</div><details class="result-help"><summary>看說明</summary><div class="result-help-body">月營收扣掉試算中的水、電、瓦斯、店租與其他每月營運成本後，剩下的預估金額。</div></details>
+        <div class="result-value" id="monthProfitDisplay">NT$ 0</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">投資金額</div><details class="result-help"><summary>看說明</summary><div class="result-help-body">開店前預估需要投入的總資金，包含機台設備與你下方設定的水電、裝潢、瓦斯、招牌、風管及其他建置費。</div></details>
+        <div class="result-value" id="totalInvestDisplay">NT$ 0</div>
+      </div>
+      <div class="result-item grid-full result-big">
+        <div class="result-label">穩定期年化 ROI</div><details class="result-help"><summary>看說明</summary><div class="result-help-body">簡單理解就是「一年預估淨利占總投資的比例」。例如 ROI 30%，代表穩定期一年預估淨利約等於投入資金的 30%；不是保證報酬。</div></details>
+        <div class="result-value" id="roiDisplay">0%</div>
+      </div>
+    </div>
+    <p class="note-text">協助你快速估算投資門檻、預期收益與回收週期。實際營運數字會因地點、機台數量、營運模式與當地消費能力而有所不同。</p>
+  </div>
+
+  <div class="card" id="settingsWrap">
+    <h3 class="section-title">投資參數設定</h3>
+    
+
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">洗脫烘 單次價格</div>
+        <div class="setting-num" id="priceVal"></div>
+      </div>
+      <input type="range" id="price" min="120" max="300" step="10" value="180" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看收費行情參考</summary><div>郊區促銷 120｜一般住宅區 150～180｜精華商圈／大機台 200～250｜大容量機型 280～300，預設 180 為全台主流定價。</div></details>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">22 公斤大型洗脫烘機台數</div>
+        <div class="setting-num" id="wash22Val"></div>
+      </div>
+      <input type="range" id="wash22" min="0" max="15" value="3" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看設備說明</summary><div>22 公斤大型洗脫烘，設備參考單價 NT$360,000／台。</div></details>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">27 公斤特大型洗脫烘機台數</div>
+        <div class="setting-num" id="wash27Val"></div>
+      </div>
+      <input type="range" id="wash27" min="0" max="15" value="3" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看設備說明</summary><div>27 公斤特大型洗脫烘，設備參考單價 NT$390,000／台。兩種洗脫烘合計建議至少 4 台。</div></details>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">獨立烘乾機組數</div>
+        <div class="setting-num" id="dryVal"></div>
+      </div>
+      <input type="range" id="dry" min="0" max="12" value="1" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看說明</summary><div>每組內含 2 台獨立烘乾機，可搭配洗脫烘增加烘衣營收。<br>獨立烘乾單台單次平均 NT$50。</div></details>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">獨立烘乾每台單次收費</div>
+        <div class="setting-num" id="dryPriceVal"></div>
+      </div>
+      <input type="range" id="dryPrice" min="30" max="100" step="10" value="50" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看行情參考</summary><div>多數門市落在 40～60 元，實際收費可依商圈與設備容量調整。</div></details>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">洗脫烘單台每日運轉次數</div>
+        <div class="setting-num" id="turnVal"></div>
+      </div>
+      <input type="range" id="turn" min="3" max="10" step="0.5" value="5" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看運轉次數說明</summary><div>3–4 次：保守營運｜5–6 次：一般穩定｜7–8 次：高使用率｜9–10 次：極佳營運。<br>建議先以 3–5 次保守試算；實際結果依店址、商圈、季節與經營狀況而異。</div></details>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">獨立烘乾單台每日運轉次數</div>
+        <div class="setting-num" id="dryTurnVal"></div>
+      </div>
+      <input type="range" id="dryTurn" min="0" max="10" step="0.5" value="5" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看說明</summary><div>烘乾使用率會受季節與天候影響，請依實際商圈情況調整。</div></details>
+    </div>
+
+    <h4 style="margin-top:28px;margin-bottom:14px;font-size:18px;">每月營運成本</h4>
+    <div class="setting-item">
+      <div class="setting-name">預估每月店租（NT$）</div>
+      <input type="number" id="rent" min="0" value="25000" oninput="calculateInvest()" />
+    </div>
+    <div class="setting-item">
+      <div class="setting-name">其他每月營運成本（NT$）</div>
+      <input type="number" id="monthlyOther" min="0" value="0" oninput="calculateInvest()" />
+      <div style="font-size:14px;color:var(--text-muted);margin-top:6px;">可填入清潔、耗材、網路、IoT、維護準備金等。</div>
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-row"><span>瓦斯（營收 7%）</span><strong id="gasMonthly"></strong></div>
+      <div class="summary-row"><span>電費（營收 5%）</span><strong id="electricMonthly"></strong></div>
+      <div class="summary-row"><span>水費（營收 3%）</span><strong id="waterMonthly"></strong></div>
+      <div class="summary-row summary-total"><span>水電瓦斯合計（15%）</span><strong id="utilCost"></strong></div>
+    </div>
+
+    <h4 style="margin-top:28px;margin-bottom:14px;font-size:18px;">設備與建置成本</h4>
+    <div class="setting-item">
+      <div class="setting-name">22 公斤大型洗脫烘單台成本（NT$）</div>
+      <input type="number" id="wash22UnitCost" min="0" value="360000" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看規格</summary><div>22 公斤大型洗脫烘：220V 單相、觸控操作、瓦斯型。實際配置以正式報價為準。</div></details>
+    </div>
+    <div class="setting-item">
+      <div class="setting-name">27 公斤特大型洗脫烘單台成本（NT$）</div>
+      <input type="number" id="wash27UnitCost" min="0" value="390000" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看規格</summary><div>27 公斤特大型洗脫烘：220V 單相、觸控操作、瓦斯型。實際配置以正式報價為準。</div></details>
+    </div>
+    <div class="setting-item">
+      <div class="setting-name">雙層獨立烘乾機每組設備成本（NT$）</div>
+      <input type="number" id="dryUnitCost" min="0" value="230000" oninput="calculateInvest()" />
+      <details class="setting-help"><summary>查看設備價格與規格</summary><div><strong>16 公斤雙層烘衣機：NT$230,000／組</strong><br>每組包含 2 台獨立烘乾機。220V 單相、觸控操作、瓦斯型；實際配置以正式報價為準。</div></details>
+    </div>
+    <div class="setting-item">
+      <div class="setting-name">水電工程費</div>
+      <input type="number" id="costWaterElec" value="170000" min="0" oninput="calculateInvest()" />
+    </div>
+    <div class="setting-item">
+      <div class="setting-name">裝潢工程費</div>
+      <input type="number" id="costDecoration" value="160000" min="0" oninput="calculateInvest()" />
+    </div>
+    <div class="setting-item">
+      <div class="setting-name">瓦斯工程費</div>
+      <input type="number" id="costGas" value="80000" min="0" oninput="calculateInvest()" />
+    </div>
+    <div class="setting-item">
+      <div class="setting-name">招牌 + 室內設計貼紙看板</div>
+      <input type="number" id="costSignDesign" value="90000" min="0" oninput="calculateInvest()" />
+    </div>
+    <div class="setting-item">
+      <div class="setting-name">風管工程費</div>
+      <input type="number" id="costDuct" value="80000" min="0" oninput="calculateInvest()" />
+    </div>
+    <div class="setting-item">
+      <div class="setting-name">其他建置費用</div>
+      <input type="number" id="costOther" value="0" min="0" oninput="calculateInvest()" />
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-row"><span>大型＋特大型洗脫烘設備</span><strong id="washInvest"></strong></div>
+      <div class="summary-row"><span>獨立烘乾設備</span><strong id="dryInvest"></strong></div>
+      <div class="summary-row"><span>工程與其他建置</span></div>
+      <div class="summary-row summary-total"><span>自動計算總投資</span><strong id="autoInvestDisplay"></strong></div>
+    </div>
+
+    <div class="switch-wrap">
+      <input type="checkbox" id="customInvestSwitch" onchange="toggleCustomInvest();calculateInvest();" />
+      <label for="customInvestSwitch">使用自訂總投資金額</label>
+    </div>
+    <div class="setting-item hidden" id="customInvestBox">
+      <div class="setting-name">自訂總投資金額（NT$）</div>
+      <input type="number" id="customInvest" min="0" value="3230000" oninput="calculateInvest()" />
+    </div>
+
+    <h4 style="margin-top:28px;margin-bottom:14px;font-size:18px;">新店營收爬坡模型</h4>
+    <div class="note-text">回本期依新店每月營收達成率逐月累積計算，而不是直接用穩定期收益相除。</div>
+
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">第 1–3 個月營收達成率</div>
+        <div class="setting-num" id="ramp1Val"></div>
+      </div>
+      <input type="range" id="ramp1" min="20" max="100" step="5" value="50" oninput="calculateInvest()" />
+      <div style="font-size:14px;color:var(--text-muted);margin-top:6px;">開店初期，顧客正在認識門市，營收逐步累積</div>
+    </div>
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">第 4–6 個月營收達成率</div>
+        <div class="setting-num" id="ramp2Val"></div>
+      </div>
+      <input type="range" id="ramp2" min="20" max="100" step="5" value="70" oninput="calculateInvest()" />
+      <div style="font-size:14px;color:var(--text-muted);margin-top:6px;">口碑慢慢建立，熟客開始穩定回訪</div>
+    </div>
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">第 7–9 個月營收達成率</div>
+        <div class="setting-num" id="ramp3Val"></div>
+      </div>
+      <input type="range" id="ramp3" min="20" max="100" step="5" value="85" oninput="calculateInvest()" />
+      <div style="font-size:14px;color:var(--text-muted);margin-top:6px;">商圈知名度成型，營收接近滿載水準</div>
+    </div>
+    <div class="setting-item">
+      <div class="setting-row">
+        <div class="setting-name">第 10 個月後營收達成率</div>
+        <div class="setting-num" id="ramp4Val"></div>
+      </div>
+      <input type="range" id="ramp4" min="20" max="120" step="5" value="100" oninput="calculateInvest()" />
+      <div style="font-size:14px;color:var(--text-muted);margin-top:6px;">穩定營運期，依照商圈潛力可再往上提升</div>
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-row"><span>洗脫烘月營收</span><strong id="washRevenue"></strong></div>
+      <div class="summary-row"><span>獨立烘乾月營收</span><strong id="dryRevenue"></strong></div>
+      <div class="summary-row"><span>穩定期月營收</span><strong id="stableRevenue"></strong></div>
+      <div class="summary-row summary-total"><span>穩定期月淨利</span><strong id="stableProfit"></strong></div>
+    </div>
+  </div>
+
+  <!-- 專業分類式加盟 Q&A -->
+  <div class="card">
+    <h3 class="section-title">加盟常見問答 Q&A</h3>
+    <p class="note-text">把開店前真正需要確認的問題先問清楚，再決定是否投入。</p>
+    <h4 style="margin:26px 0 10px;font-size:17px;">加盟與開始</h4>
+    <div class="qa-list">
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：沒有洗衣產業經驗，也可以加盟嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：可以。比經驗更重要的是資金規劃、店面條件與持續管理的意願。洗思特可協助整理選址、設備配置、工程與營運流程，但加盟主仍需參與重要決策與日常管理。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：還沒有店面，可以先找洗思特評估嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：可以，而且建議在簽租約前先評估。可先提供預計開店縣市、預算、希望商圈與開店時間；找到候選店面後，再確認租金、競爭店、給排水、排風、設備搬運與其他工程條件。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：加盟費、權利金、每月抽成是多少？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：實際合作費用、設備與工程項目請以洗思特當期正式報價及加盟合約為準。建議比較時看整體開店總投入，而不是只看單一加盟金或機器售價。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：從找到店面到開幕，大約有哪些流程？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：一般會依序進行初步諮詢、商圈與場地評估、設備及店型規劃、分項報價、簽約、工程施工、設備測試與開幕準備。實際工期會依現場條件與工程內容不同。</div></div></div>
+    </div>
+    <h4 style="margin:26px 0 10px;font-size:17px;">店面與選址</h4>
+    <div class="qa-list">
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：一定要一樓店面嗎？二樓可以嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：洗思特原則上優先評估一樓店面。商用設備重量高，還需考量搬運、承重、給排水、排風與日後維修動線；二樓以上場地需另外確認建築結構及相關條件，不建議在完成專業評估前簽約。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：店面需要多大坪數才適合？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：沒有單一固定坪數。應依面寬、格局、設備數量與容量、顧客動線、給排水、排風及維修空間綜合規劃。找到店面後，建議先做現場評估再決定設備配置。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：附近已經有自助洗衣店，還適合開嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：不能只看附近有沒有同業。還要比較住宅與租屋人口、競爭店距離與設備規模、定價、店面能見度、停車便利性及租金。洗思特可依候選店面協助做商圈條件評估，但不以單一因素保證營收。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：自有店面或閒置店面，一定適合改成自助洗衣嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：不一定。有自己的店面仍要評估商圈需求、租金機會成本、設備工程條件、建物使用與當地規定。先評估再施工，可降低後續追加工程或配置不合適的風險。</div></div></div>
+    </div>
+    <h4 style="margin:26px 0 10px;font-size:17px;">設備與售後</h4>
+    <div class="qa-list">
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：設備價格差很多，到底應該怎麼比較？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：不要只比較第一天的機器報價。自助洗衣是長期營運設備，更應一起比較台灣實際使用經驗、關鍵零件品質、設備來源、維修窗口、零件供應能力與停機後的處理方式。便宜，是買機器那一天的事；穩定，是開店之後每一天的事。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：洗思特設備有台灣實際使用經驗嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：依洗思特提供的品牌資料，設備已累積台灣市場 8 年實際使用經驗。加盟評估時可進一步了解實際機型、零件配置與服務內容。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：設備故障後，零件和維修要找誰？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：設備售後最重要的是有清楚的服務窗口與零件供應方式。洗思特提供後續維修與耗材相關支援；實際保固年限、服務範圍、到場方式與費用，以正式設備資料及加盟合約為準。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：營運常見的耗材或消耗零件有哪些？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：不同機型的保養與耗材項目不同，應依原廠規格及實際使用狀況定期檢查。加盟前建議把耗材取得、零件供應、保養週期及維修流程一起確認，而不是只問機器售價。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：機台可以支援行動支付嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：付款功能依實際設備與系統方案而定。若採用現金、行動支付或儲值系統，應在規劃階段確認系統整合、費率與後續管理方式，以正式設備規格及報價為準。</div></div></div>
+    </div>
+    <h4 style="margin:26px 0 10px;font-size:17px;">營運與回本</h4>
+    <div class="qa-list">
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：開一間自助洗衣店大約需要多少預算？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：總投入會受到機台數量、容量、店面條件、給排水、排風、裝潢、支付系統與其他工程影響。不要只看單一設備價格；可先使用上方試算工具做情境模擬，再依現場評估取得分項報價。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：需要僱用店員長時間看店嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：自助洗衣可降低長時間駐店的人力需求，但不是完全不用管理。仍需定期清潔、巡店、補充耗材、設備檢查及處理顧客問題；若搭配遠端管理系統，可進一步降低日常管理負擔。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：多久可以回本？試算結果準嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：沒有固定回本年限。回本速度取決於總投入、租金、設備使用率、定價、能源成本、維修及商圈需求。上方工具是情境模擬，建議同時測試保守、一般與高使用率情境，不應視為營收或獲利保證。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：水電瓦斯成本怎麼估？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：目前試算工具以營收比例作為簡化估算，方便快速比較不同情境。實際能源成本會依設備、使用率、費率與現場條件不同，正式開店評估仍應以設備規格與實際帳單條件估算。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：淡季、旺季營收會差很多嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：使用率可能受到季節、天候、商圈與顧客結構影響。評估時不要只用旺季數字，建議以保守、一般與高使用率多種情境試算，並預留營運安全空間。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：如果開店後營收不如預期怎麼辦？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：應先從設備使用率、尖離峰時段、定價、店面清潔、顧客評價與周邊競爭等資料找原因，再決定促銷或營運調整。洗思特可提供營運優化方向；實際改善幅度仍取決於個別門市條件。</div></div></div>
+    </div>
+    <h4 style="margin:26px 0 10px;font-size:17px;">法規與合約</h4>
+    <div class="qa-list">
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：開自助洗衣店需要辦理哪些登記或法規程序？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：實際可能涉及公司或商業登記、稅籍、建物使用、消防、燃氣、排風及其他相關要求，且會依所在地、建物與使用能源不同。洗思特可協助整理開店流程，最終仍以所在地主管機關及專業人員確認為準。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：加盟是否有指定設備、耗材或洗劑？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：為維持門市品質與設備相容性，部分設備、關鍵耗材或洗劑可能依加盟方案採指定或認證規格；實際採購範圍、價格與義務應以正式加盟合約及報價內容為準。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：加盟合約多久？可以轉店或退場嗎？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：合約期限、續約、轉讓、提前終止及相關費用都應在簽約前看清楚。洗思特實際條件以雙方簽署的正式加盟合約為準，建議簽約前逐條確認。</div></div></div>
+      <div class="qa-item"><button class="qa-btn" onclick="toggleQa(this)">Q：同一商圈會不會再開其他洗思特門市？<span>+</span></button><div class="qa-body"><div class="qa-inner">A：商圈保護或展店距離若有約定，應以正式加盟合約的範圍、期間與條件為準。市場上其他品牌仍屬自由競爭，因此選址時仍應把周邊競爭納入評估。</div></div></div>
+    </div>
+  </div>
+
+  
+    <p>免費諮詢，提供場地資料即可初步評估投資與獲利。</p>
+    
+    <div style="margin-top:16px;font-size:14px;line-height:1.9;">
+      <strong>洗思特加盟總部｜免費加盟諮詢</strong><br>
+      LINE ID：Long5208<br>
+      電話：<a href="tel:0908115899" style="color:inherit;text-decoration:underline;">0908-115-899</a><br>
+      <a href="https://line.me/ti/p/OtHSgi9biU" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">加入 LINE，免費通話、傳訊諮詢</a>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+免責聲明：本網頁試算工具僅做投資模擬參考，不構成任何投資邀約與獲利保證。所有實際營運數字，請以現場評估與正式合約為準。
+  </div>
+</div>
+
+<footer>© 2026 洗思特自助洗衣｜SISTER 加盟總部<br><span style="font-size:13px;">LINE：Long5208｜加盟專線：0908-115-899</span></footer>
+
+<script>
+// QA展開收合
+function toggleQa(btn){
+  const item = btn.closest('.qa-item');
+  item.classList.toggle('open');
+  const icon = btn.querySelector('span');
+  icon.textContent = item.classList.contains('open') ? '−' : '+';
+}
+
+function toggleCustomInvest(){
+  const cb = document.getElementById('customInvestSwitch');
+  const box = document.getElementById('customInvestBox');
+  if(cb.checked){
+    box.classList.remove('hidden');
+  }else{
+    box.classList.add('hidden');
+  }
+}
+
+function formatCurrency(num){
+  if(isNaN(num)) num = 0;
+  return "NT$ " + Number(num).toLocaleString('zh-TW');
+}
+
+function calculateInvest(){
+  const price = Number(document.getElementById('price').value);
+  const wash22Count = Number(document.getElementById('wash22').value);
+  const wash27Count = Number(document.getElementById('wash27').value);
+  const washCount = wash22Count + wash27Count;
+  const dryGroup = Number(document.getElementById('dry').value);
+  const dryPrice = Number(document.getElementById('dryPrice').value);
+  const turn = Number(document.getElementById('turn').value);
+  const dryTurn = Number(document.getElementById('dryTurn').value);
+
+  const rent = Number(document.getElementById('rent').value);
+  const monthlyOther = Number(document.getElementById('monthlyOther').value);
+
+  const wash22UnitCost = Number(document.getElementById('wash22UnitCost').value);
+  const wash27UnitCost = Number(document.getElementById('wash27UnitCost').value);
+  const dryUnitCost = Number(document.getElementById('dryUnitCost').value);
+  const costWaterElec = Number(document.getElementById('costWaterElec').value);
+  const costDecoration = Number(document.getElementById('costDecoration').value);
+  const costGas = Number(document.getElementById('costGas').value);
+  const costSignDesign = Number(document.getElementById('costSignDesign').value);
+  const costDuct = Number(document.getElementById('costDuct').value);
+  const costOther = Number(document.getElementById('costOther').value);
+
+  const ramp1 = Number(document.getElementById('ramp1').value);
+  const ramp2 = Number(document.getElementById('ramp2').value);
+  const ramp3 = Number(document.getElementById('ramp3').value);
+  const ramp4 = Number(document.getElementById('ramp4').value);
+
+  const customInvestSwitch = document.getElementById('customInvestSwitch').checked;
+  const customInvestVal = Number(document.getElementById('customInvest').value);
+
+  document.getElementById('priceVal').innerText = price;
+  document.getElementById('wash22Val').innerText = wash22Count;
+  document.getElementById('wash27Val').innerText = wash27Count;
+  document.getElementById('dryVal').innerText = dryGroup;
+  document.getElementById('dryPriceVal').innerText = dryPrice;
+  document.getElementById('turnVal').innerText = turn;
+  document.getElementById('dryTurnVal').innerText = dryTurn;
+  document.getElementById('ramp1Val').innerText = ramp1 + "%";
+  document.getElementById('ramp2Val').innerText = ramp2 + "%";
+  document.getElementById('ramp3Val').innerText = ramp3 + "%";
+  document.getElementById('ramp4Val').innerText = ramp4 + "%";
+
+  const washDaily = washCount * turn;
+  const washMonthRevenue = washDaily * price * 30;
+  const dryDaily = dryGroup * 2 * dryTurn;
+  const dryMonthRevenue = dryDaily * dryPrice * 30;
+  const stableRevenue = washMonthRevenue + dryMonthRevenue;
+
+  const gasCost = stableRevenue * 0.07;
+  const elecCost = stableRevenue * 0.05;
+  const waterCost = stableRevenue * 0.03;
+  const utilTotal = gasCost + elecCost + waterCost;
+
+  const monthProfitStable = stableRevenue - utilTotal - rent - monthlyOther;
+
+  const washInvestTotal = (wash22Count * wash22UnitCost) + (wash27Count * wash27UnitCost);
+  const dryInvestTotal = dryGroup * dryUnitCost;
+  const fixedCostTotal = costWaterElec + costDecoration + costGas + costSignDesign + costDuct + costOther;
+  const autoTotalInvest = washInvestTotal + dryInvestTotal + fixedCostTotal;
+
+  let totalInvest;
+  if(customInvestSwitch){
+    totalInvest = customInvestVal;
+  }else{
+    totalInvest = autoTotalInvest;
+  }
+
+  let remainCapital = totalInvest;
+  let paybackMonth = 999;
+  const profitPerMonth = monthProfitStable;
+  if(profitPerMonth > 0){
+    for(let m=1;m<=3;m++){
+      remainCapital -= profitPerMonth * (ramp1 / 100);
+      if(remainCapital <= 0){
+        paybackMonth = m;
+        remainCapital = 0;
+        break;
+      }
+    }
+    if(remainCapital > 0){
+      for(let m=4;m<=6;m++){
+        remainCapital -= profitPerMonth * (ramp2 / 100);
+        if(remainCapital <=0){
+          paybackMonth = m;
+          remainCapital=0;
+          break;
+        }
+      }
+    }
+    if(remainCapital>0){
+      for(let m=7;m<=9;m++){
+        remainCapital -= profitPerMonth * (ramp3 /100);
+        if(remainCapital <=0){
+          paybackMonth = m;
+          remainCapital=0;
+          break;
+        }
+      }
+    }
+    if(remainCapital>0){
+      const monthlyProfitFull = profitPerMonth * (ramp4 / 100);
+      const extraMonth = remainCapital / monthlyProfitFull;
+      paybackMonth = 10 + extraMonth - 1;
+    }
+  }else{
+    paybackMonth = 999;
+  }
+
+  let roiPercent = 0;
+  if(totalInvest >0 && profitPerMonth>0){
+    roiPercent = (profitPerMonth *12 / totalInvest)*100;
+  }
+
+  document.getElementById('monthRevenueDisplay').innerText = formatCurrency(stableRevenue);
+  document.getElementById('monthProfitDisplay').innerText = formatCurrency(monthProfitStable);
+  document.getElementById('totalInvestDisplay').innerText = formatCurrency(totalInvest);
+
+  if(paybackMonth >=999){
+    document.getElementById('paybackDisplay').innerText = "無法回收";
+  }else{
+    const paybackYears = paybackMonth / 12;
+    document.getElementById('paybackDisplay').innerText = paybackYears.toFixed(1) + " 年";
+  }
+
+  const roiDom = document.getElementById('roiDisplay');
+  roiDom.innerText = roiPercent.toFixed(1)+"%";
+  roiDom.className = "result-value";
+  // Visual bands are presentation aids only, not an investment recommendation.
+  if(roiPercent < 20) roiDom.classList.add("roi-low");
+  else if(roiPercent < 35) roiDom.classList.add("roi-mid");
+  else roiDom.classList.add("roi-high");
+
+  document.getElementById('gasMonthly').innerText = formatCurrency(gasCost);
+  document.getElementById('electricMonthly').innerText = formatCurrency(elecCost);
+  document.getElementById('waterMonthly').innerText = formatCurrency(waterCost);
+  document.getElementById('utilCost').innerText = formatCurrency(utilTotal);
+
+  document.getElementById('washInvest').innerText = formatCurrency(washInvestTotal);
+  document.getElementById('dryInvest').innerText = formatCurrency(dryInvestTotal);
+  document.getElementById('fixedInvest').innerText = formatCurrency(fixedCostTotal);
+  document.getElementById('autoInvestDisplay').innerText = formatCurrency(autoTotalInvest);
+
+  document.getElementById('washRevenue').innerText = formatCurrency(washMonthRevenue);
+  document.getElementById('dryRevenue').innerText = formatCurrency(dryMonthRevenue);
+  document.getElementById('stableRevenue').innerText = formatCurrency(stableRevenue);
+  document.getElementById('stableProfit').innerText = formatCurrency(monthProfitStable);
+}
+
+window.onload = function(){
+  toggleCustomInvest();
+  calculateInvest();
+  updateMonthlyCountdown();
+}
+
+  function updateMonthlyCountdown(){
+    const now=new Date();
+    const y=now.getFullYear(), m=now.getMonth();
+    const end=new Date(y,m+1,1);
+    const days=Math.max(0,Math.ceil((end-now)/86400000));
+    const ml=document.getElementById('monthLabel');
+    const cd=document.getElementById('monthCountdown');
+    if(ml) ml.textContent=(m+1)+' 月';
+    if(cd) cd.textContent=days<=7 ? '本月評估名額即將截止｜剩 '+days+' 天' : '距本月評估截止還有 '+days+' 天';
+  }
+const menuBtn=document.getElementById('menuBtn'),siteMenu=document.getElementById('siteMenu');
+if(menuBtn&&siteMenu){
+ menuBtn.addEventListener('click',e=>{e.stopPropagation();const open=siteMenu.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));});
+ siteMenu.addEventListener('click',()=>{siteMenu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');});
+ document.addEventListener('click',e=>{if(!siteMenu.contains(e.target)&&e.target!==menuBtn){siteMenu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}});
+}
+</script>
+<style>
+#quoteFab{position:fixed;right:14px;bottom:14px;z-index:9998;border:0;border-radius:999px;padding:13px 18px;background:#00C755;color:#fff;font-weight:900;font-size:15px;box-shadow:0 8px 24px rgba(0,199,85,.32);cursor:pointer}
+#quoteModal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.72);padding:18px;overflow:auto}
+#quoteModal.open{display:flex;align-items:flex-start;justify-content:center}
+.quote-panel{width:min(100%,560px);margin:auto;background:#111A2E;border:1px solid #25355C;border-radius:20px;padding:24px;color:#fff;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.quote-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:18px}.quote-head h3{font-size:22px;color:#FFD166}.quote-close{border:0;background:transparent;color:#fff;font-size:28px;cursor:pointer;line-height:1}
+.quote-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.quote-field{display:flex;flex-direction:column;gap:6px}.quote-field.full{grid-column:1/-1}.quote-field label{font-size:13px;font-weight:800;color:#E2E8F0}.quote-field input,.quote-field select,.quote-field textarea{width:100%;border:1px solid #25355C;border-radius:10px;background:#0B1220;color:#fff;padding:12px;font-size:16px}.quote-field textarea{min-height:82px;resize:vertical}
+.quote-submit{width:100%;margin-top:16px;border:0;border-radius:12px;padding:14px;background:linear-gradient(135deg,#FFD166,#FFB020);color:#111A2E;font-weight:900;font-size:16px;cursor:pointer}.quote-submit:disabled{opacity:.6}
+.quote-note{font-size:12px;color:#9AA5C7;margin-top:10px;line-height:1.6}.quote-success{display:none;text-align:center}.quote-success.show{display:block}.quote-success .qid{font-size:21px;font-weight:900;color:#FFD166;margin:12px 0}.quote-line{display:block;text-decoration:none;background:#00C755;color:#fff;padding:14px;border-radius:12px;font-weight:900;margin-top:14px}.quote-copy{width:100%;border:1px solid #25355C;background:#14213D;color:#fff;padding:12px;border-radius:12px;font-weight:800;margin-top:10px;cursor:pointer}
+@media(max-width:560px){.quote-form-grid{grid-template-columns:1fr}.quote-field.full{grid-column:auto}.quote-panel{padding:20px}.quote-head h3{font-size:20px}}
+</style>
+
+<div id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="quoteTitle">
+ <div class="quote-panel">
+  <div id="quoteFormWrap">
+   <div class="quote-head"><div><h3 id="quoteTitle">取得洗思特加盟報價</h3><div style="color:#9AA5C7;font-size:13px;margin-top:4px">留下基本資料，我們會依你的開店條件進一步聯繫。</div></div><button class="quote-close" id="quoteClose" aria-label="關閉">×</button></div>
+   <form id="quoteInquiryForm">
+    <div class="quote-form-grid">
+     <div class="quote-field"><label for="inqName">姓名 *</label><input id="inqName" maxlength="30" required autocomplete="name"></div>
+     <div class="quote-field"><label for="inqPhone">手機 *</label><input id="inqPhone" inputmode="tel" maxlength="10" placeholder="09xxxxxxxx" required autocomplete="tel"></div>
+     <div class="quote-field full"><label for="inqLocation">預計開店地區 *</label><input id="inqLocation" maxlength="60" placeholder="例如：台南市永康區" required></div>
+     <div class="quote-field"><label for="inqStore">目前店面狀況</label><select id="inqStore"><option>尋找中</option><option>已有店面</option><option>尚未開始找</option></select></div>
+     <div class="quote-field"><label for="inqBudget">預計預算</label><select id="inqBudget"><option value="">尚未確定</option><option>200 萬以下</option><option>200–300 萬</option><option>300–400 萬</option><option>400 萬以上</option></select></div>
+     <div class="quote-field full"><label for="inqNote">其他需求（選填）</label><textarea id="inqNote" maxlength="300" placeholder="例如：已有店面，希望協助評估設備配置"></textarea></div>
+    </div>
+    <button class="quote-submit" id="quoteSubmit" type="submit">送出加盟詢價</button>
+    <div class="quote-note">送出後會產生詢價編號，並將本頁目前的試算摘要一併提供給洗思特加盟業務。正式價格與方案以後續報價為準。</div>
+   </form>
+  </div>
+  <div id="quoteSuccess" class="quote-success">
+   <div style="font-size:42px">✓</div><h3 style="color:#39FF86;font-size:23px">詢價已送出</h3>
+   <p style="color:#E2E8F0;margin-top:8px">請記下你的詢價編號：</p><div class="qid" id="quoteIdDisplay"></div>
+   <p style="color:#E2E8F0;font-size:14px">下一步加入業務 LINE，貼上詢價編號，我們就能更快接續你的資料。</p>
+   <button id="copyInquiryMsg" class="quote-copy" type="button">複製 LINE 詢價訊息</button>
+   
+   <button id="quoteDone" class="quote-copy" type="button">完成</button>
+  </div>
+ </div>
+</div>
+<script>
+(function(){
+ const modal=document.getElementById('quoteModal'), fab=document.getElementById('quoteFab'), close=document.getElementById('quoteClose'), form=document.getElementById('quoteInquiryForm'), submit=document.getElementById('quoteSubmit');
+ let inquiryId='', lineMessage='';
+ const open=()=>{document.getElementById('quoteFormWrap').style.display='block';document.getElementById('quoteSuccess').classList.remove('show');modal.classList.add('open');document.body.style.overflow='hidden';};
+ const shut=()=>{modal.classList.remove('open');document.body.style.overflow='';};
+ fab.addEventListener('click',open); close.addEventListener('click',shut); document.getElementById('quoteDone').addEventListener('click',shut);
+ modal.addEventListener('click',e=>{if(e.target===modal)shut();});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')shut();});
+ function makeId(){const d=new Date(),p=n=>String(n).padStart(2,'0');return 'Q'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'-'+p(d.getHours())+p(d.getMinutes())+p(d.getSeconds());}
+ function t(id){return document.getElementById(id)?.innerText?.trim()||'—';}
+ form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const name=document.getElementById('inqName').value.trim(), phone=document.getElementById('inqPhone').value.replace(/[^0-9]/g,''), location=document.getElementById('inqLocation').value.trim();
+  document.getElementById('inqPhone').value=phone;
+  if(phone.length!==10 || !phone.startsWith('09')){alert('請輸入正確的台灣手機號碼（09 開頭，共 10 碼）。');return;}
+  inquiryId=makeId();
+  const store=document.getElementById('inqStore').value, budget=document.getElementById('inqBudget').value||'尚未確定', note=document.getElementById('inqNote').value.trim()||'無';
+  const summary=['詢價編號：'+inquiryId,'店面狀況：'+store,'預算：'+budget,'客戶備註：'+note,'','目前網站試算摘要','總投資：'+t('totalInvestDisplay'),'穩定期月營收：'+t('monthRevenueDisplay'),'穩定期月淨利：'+t('monthProfitDisplay'),'回本期：'+t('paybackDisplay'),'年化 ROI：'+t('roiDisplay'),'設備：22kg '+(document.getElementById('wash22')?.value||0)+' 台／27kg '+(document.getElementById('wash27')?.value||0)+' 台／雙層烘乾 '+(document.getElementById('dry')?.value||0)+' 組'].join('\\n');
+  submit.disabled=true;submit.textContent='送出中…';
+  try{
+   const r=await fetch('/api/line-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone,location,note:summary,source:'洗思特官網加盟詢價'})});
+   const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||('HTTP '+r.status));
+   lineMessage='您好，我剛剛完成洗思特加盟詢價，我的詢價編號是 '+inquiryId+'，想進一步了解設備與開店方案。';
+   document.getElementById('quoteIdDisplay').textContent=inquiryId;document.getElementById('quoteFormWrap').style.display='none';document.getElementById('quoteSuccess').classList.add('show');
+  }catch(err){alert('詢價暫時無法送出，請稍後再試，或直接加入 LINE 聯繫。');}
+  finally{submit.disabled=false;submit.textContent='送出加盟詢價';}
+ });
+ document.getElementById('copyInquiryMsg').addEventListener('click',async function(){try{await navigator.clipboard.writeText(lineMessage);this.textContent='已複製，請到 LINE 貼上';}catch(e){prompt('請複製以下訊息：',lineMessage);}});
+})();
+</script>
+<!-- inquiry-flow-v1 -->
+</body>
+</html>
+<!-- redeploy-trigger-20260919 -->
